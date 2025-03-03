@@ -14,6 +14,24 @@ m2_current = 0
 mse_List =[]
 m1_Values=[]
 m2_Values=[]
+min_mse = float('inf')
+
+# Linear Serach 
+m1_linear = np.linspace(-4,4,100)
+m2_linear = np.linspace(-2,2,100)
+
+for m1 in m1_linear:
+    for m2 in m2_linear:
+        y_predicted = m1 * x + m2  # Calculating predicted y values
+        mse = np.mean((y - y_predicted) ** 2)  # Mean Squared Error
+
+        # Updating the best m1, m2 if the current mse is lower
+        if mse < min_mse:
+            min_mse = mse
+            best_m1, best_m2 = m1, m2
+            
+print(f"Best m1: {best_m1:.4f}, Best m2: {best_m2:.4f}, Minimum MSE: {min_mse:.4f}")
+
 
 def gradient_descent(x, y, m1_current, m2_current):
     learning_rate = 0.001  # Small steps to prevent overshooting
